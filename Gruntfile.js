@@ -7,7 +7,20 @@ module.exports = function(grunt) {
 	 	 pkg: grunt.file.readJSON('package.json'),
 
 
+	 	 watch: {
+			dist: { 
+				files: [ 'app/js/**/*.js'
+				], 
+				tasks: ['default'], 
+			}, 
+			options: { spawn:false}	 	 	
+	 	 }, 
+
 		jshint: {
+			options: {
+    				jshintrc: ".jshintrc", 
+			},
+
 		    all: ['app/js/**/*.js']
 	  },
 
@@ -34,10 +47,16 @@ module.exports = function(grunt) {
 	      dest: 'app/dist/built.js',
 	    }
 	  }, 
+
 	   uglify: {
-   		 my_target: {
+
+	   	options:{
+
+	   	}, 
+
+   		 dist: {
       		files: {
-        	'app/dist/built.js': ['app/dist/built.js']
+        	'app/dist/built2.js': ['app/dist/built.js']
       	}
     	}
   	}	  
@@ -46,12 +65,12 @@ module.exports = function(grunt) {
 
 
 // 
-	 grunt.loadNpmTasks('grunt-contrib-concat');
-	 grunt.loadNpmTasks('grunt-contrib-uglify');
-	 grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-watch');
 
-
-	 grunt.registerTask('default', ['jshint', 'concat','uglify'] ); 
+	grunt.registerTask('default', ['jshint', 'concat','uglify'] ); 
 
 
 };
